@@ -1,21 +1,13 @@
 'use strict';
 
-const reveal = document.querySelectorAll('.reveal');
+const orangeBox = document.getElementsByClassName('reveal');
 
-document.addEventListener('scroll', show);
-
-
-function show(event) {
+window.addEventListener('scroll', function () {
 
     const viewportHeight = window.innerHeight;
 
-    for (let element of reveal) {
-
-        const elementTop = element.getBoundingClientRect().top;
-        if (elementTop < viewportHeight) {
-            element.classList.add('reveal_active');
-        } else {
-            element.classList.remove('reveal_active');
-        }
+    for (const element of orangeBox) {
+        const block = element.getBoundingClientRect();
+        element.classList.toggle('reveal_active', (block.top < viewportHeight) && (block.bottom > 0));
     }
-}
+})
