@@ -13,10 +13,14 @@ function check(event) {
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://netology-slow-rest.herokuapp.com/upload.php');
-    xhr.onprogress = function (event) {
+    xhr.upload.onprogress = function (event) {
 
-        progress.value = event.loaded / 1000000;
+        progress.value = event.loaded / event.total;
     }
-    xhr.send(formData);
 
+    xhr.upload.onload = function() {
+        alert("Данные полностью загружены на сервер!");
+    }
+
+    xhr.send(formData);
 }
